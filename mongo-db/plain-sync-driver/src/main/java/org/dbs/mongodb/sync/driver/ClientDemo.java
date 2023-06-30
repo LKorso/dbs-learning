@@ -4,8 +4,8 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import org.bson.Document;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 public class ClientDemo {
 
@@ -17,11 +17,13 @@ public class ClientDemo {
 
     public List<Document> findAllBooks() {
         try (MongoClient client = MongoClients.create(url)) {
-            var books = client.getDatabase("test-db")
-                    .getCollection("books");
-            var result = new ArrayList<Document>();
-            books.find().forEach(result::add);
-            return result;
+            return StreamSupport.stream(
+                    client.getDatabase("test-db")
+                            .getCollection("books")
+                            .find()
+                            .spliterator(),
+                    false
+            ).toList();
         }
     }
 }

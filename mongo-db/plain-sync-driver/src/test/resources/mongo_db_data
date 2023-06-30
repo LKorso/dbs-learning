@@ -1,6 +1,0 @@
-use test-db
-
-db.books.insertOne({
-name: "The Invincible",
-author: "Stanislaw Lem"
-})
