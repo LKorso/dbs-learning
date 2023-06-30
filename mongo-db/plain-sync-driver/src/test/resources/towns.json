@@ -1,0 +1,41 @@
+[
+  {
+    "name": "New York",
+    "population": 22200000,
+    "lastCensus": "2016-07-01T00:00:00Z",
+    "famousFor": [
+      "the MOMA",
+      "food",
+      "Derek Jeter"
+    ],
+    "mayor": {
+      "name": "Bill de Blasio",
+      "party": "I"
+    }
+  },
+  {
+    "name": "Punxsutawney",
+    "population": 6200,
+    "lastCensus": "2016-01-31",
+    "famousFor": [
+      "Punxsutawney Phil"
+    ],
+    "mayor": {
+      "name": "Richard Alexander"
+    }
+  },
+  {
+    "name": "Portland",
+    "population": 582000,
+    "lastCensus": "2016-09-20",
+    "famousFor": [
+      "beer",
+      "food",
+      "Portlandia"
+    ],
+    "mayor": {
+      "name": "Ted Wheeler",
+      "party": "D"
+    }
+  }
+]
