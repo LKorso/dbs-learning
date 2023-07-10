@@ -12,13 +12,13 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import java.io.IOException;
-import java.util.function.Predicate;
 
+import static com.mongodb.client.model.Filters.eq;
 import static org.assertj.core.api.Assertions.assertThat;
-import static com.mongodb.client.model.Filters.*;
+import static org.dbs.mongodb.sync.driver.DocumentPredicate.hasFieldWithValue;
 
 @Testcontainers
-class ClientDemoTest {
+class ChapterOneHomeworkTest {
 
     @Container
     private static MongoDBContainer container = new MongoDBContainer(DockerImageName.parse("mongo:latest"));
@@ -86,9 +86,5 @@ class ClientDemoTest {
                     .anyMatch(hasFieldWithValue("text", "Great article").and(hasFieldWithValue("author", "author-1")))
                     .anyMatch(hasFieldWithValue("text", "It's dog water").and(hasFieldWithValue("author", "author-2")));
         }
-    }
-
-    private Predicate<Document> hasFieldWithValue(String field, String value) {
-        return document -> document != null && value.equals(document.getString(field));
     }
 }
