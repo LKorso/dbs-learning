@@ -1,0 +1,80 @@
+version: '3'
+services:
+#Config servers
+  config-server-1:
+    container_name: config-server-1
+    image: mongo
+    volumes:
+      - ./config-server/replicaSet.js:/replicaSet.js
+      - ./config-server/setup.sh:/setup.sh
+    command: >
+      bash -c "mongod --configsvr --replSet configServers --port 27017 & ./setup.sh"
+    ports:
+      - "40001:27017"
+    depends_on:
+      - config-server-2
+      - config-server-3
+  config-server-2:
+    container_name: config-server-2
+    image: mongo
+    command: mongod --configsvr --replSet configServers --port 27017
+    ports:
+      - "40002:27017"
+  config-server-3:
+    container_name: config-server-3
+    image: mongo
+    command: mongod --configsvr --replSet configServers --port 27017
+    ports:
+      - "40003:27017"
+
+## Replica set rs0
+#  mongo-rs0-01:
+#    image: mongo
+#    command: mongod --replSet rs0 --shardsvr
+#    ports:
+#      - "27017:27017"
+#    depends_on:
+#      - mongo-rs0-02
+#      - mongo-rs0-03
+#  mongo-rs0-02:
+#    image: mongo
+#    command: mongod --replSet rs0 --shardsvr
+#    ports:
+#      - "27018:27017"
+#  mongo-rs0-03:
+#    image: mongo
+#    command: mongod --replSet rs0 --shardsvr
+#    ports:
+#      - "27019:27017"
+#
+## Replica set rs1
+#  mongo-rs1-01:
+#    image: mongo
+#    command: mongod --replSet rs1 --shardsvr
+#    ports:
+#      - "27020:27017"
+#    depends_on:
+#      - mongo-rs1-02
+#      - mongo-rs1-03
+#  mongo-rs1-02:
+#    image: mongo
+#    command: mongod --replSet rs1 --shardsvr
+#    ports:
+#      - "27021:27017"
+#  mongo-rs1-03:
+#    image: mongo
+#    command: mongod --replSet rs1 --shardsvr
+#    ports:
+#      - "27022:27017"
+#
+## Sharding cluster entry point
+#  mongos:
+#    container_name: mongos
+#    image: mongo
+#    command: mongos --configdb configServers/config-server-1:40001,config-server-2:40002,config-server-3:40003
+#    ports:
+#      - "60000:27017"
+#    depends_on:
+#      - mongo-rs0-01
+#      - mongo-rs1-01
+#      - config-server-1
