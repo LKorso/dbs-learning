@@ -1,0 +1,12 @@
+version: '3'
+services:
+  # Sharding cluster entry point
+  mongos:
+    container_name: mongos
+    image: mongo
+    volumes:
+      - ./add-shards.js:/add-shards.js
+      - ./setup.sh:/setup.sh
+    command: mongos --configdb configServers/172.20.240.1:40001,172.20.240.1:40002,172.20.240.1:40003 --bind_ip 0.0.0.0 --port 27017
+    ports:
+      - "60000:27017"

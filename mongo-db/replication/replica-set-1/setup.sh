@@ -1,8 +1,8 @@
 #!/bin/bash
 echo '**********************************************************'
-echo 'Setting up sharding'
+echo 'Starting the replica set rs1'
 echo '**********************************************************'
 
-mongosh add-shards.js
+mongosh replicaSet.js
 
-mongosh --eval "sh.status()"
+mongosh --eval "rs.status()"

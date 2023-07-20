@@ -1,7 +1,8 @@
 #!/bin/bash
-echo **********************************************************
-echo Starting the replica set rs0
-echo **********************************************************
+echo '**********************************************************'
+echo 'Setting up replica set configServers'
+echo '**********************************************************'
 
-sleep 10 | echo Sleeping
 mongosh replicaSet.js
+
+mongosh --eval "rs.status()"

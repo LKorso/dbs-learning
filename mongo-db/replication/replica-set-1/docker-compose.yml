@@ -1,0 +1,27 @@
+version: '3'
+services:
+  ## Replica set rs1
+  mongo-rs1-01:
+    container_name: mongo-rs1-01
+    image: mongo
+    volumes:
+      - ./replicaSet.js:/replicaSet.js
+      - ./setup.sh:/setup.sh
+    command: mongod --replSet rs1 --shardsvr --port 27017
+    ports:
+      - "10001:27017"
+    depends_on:
+      - mongo-rs1-02
+      - mongo-rs1-03
+  mongo-rs1-02:
+    container_name: mongo-rs1-02
+    image: mongo
+    command: mongod --replSet rs1 --shardsvr --port 27017
+    ports:
+      - "10002:27017"
+  mongo-rs1-03:
+    container_name: mongo-rs1-03
+    image: mongo
+    command: mongod --replSet rs1 --shardsvr --port 27017
+    ports:
+      - "10003:27017"

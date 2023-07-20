@@ -1,0 +1,27 @@
+version: '3'
+services:
+  #Config servers
+  config-server-1:
+    container_name: config-server-1
+    image: mongo
+    volumes:
+      - ./replicaSet.js:/replicaSet.js
+      - ./setup.sh:/setup.sh
+    command: mongod --configsvr --replSet configServers --port 27017
+    ports:
+      - "40001:27017"
+    depends_on:
+      - config-server-2
+      - config-server-3
+  config-server-2:
+    container_name: config-server-2
+    image: mongo
+    command: mongod --configsvr --replSet configServers --port 27017
+    ports:
+      - "40002:27017"
+  config-server-3:
+    container_name: config-server-3
+    image: mongo
+    command: mongod --configsvr --replSet configServers --port 27017
+    ports:
+      - "40003:27017"
