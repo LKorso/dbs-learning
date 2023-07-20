@@ -2,9 +2,9 @@ rs.initiate(
     {
         _id: "rs2",
         members: [
-            { _id : 1, host : "172.20.240.1:20001" },
-            { _id : 2, host : "172.20.240.1:20002" },
-            { _id : 3, host : "172.20.240.1:20003" }
+            { _id : 1, host : "mongo-rs2-01:27017" },
+            { _id : 2, host : "mongo-rs2-02:27017" },
+            { _id : 3, host : "mongo-rs2-03:27017" }
         ]
     }
 )

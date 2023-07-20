@@ -8,8 +8,8 @@ services:
       - ./replicaSet.js:/replicaSet.js
       - ./setup.sh:/setup.sh
     command: mongod --configsvr --replSet configServers --port 27017
-    ports:
-      - "40001:27017"
+    networks:
+      - ${MONGO_NETWORK}
     depends_on:
       - config-server-2
       - config-server-3
@@ -17,11 +17,16 @@ services:
     container_name: config-server-2
     image: mongo
     command: mongod --configsvr --replSet configServers --port 27017
-    ports:
-      - "40002:27017"
+    networks:
+      - ${MONGO_NETWORK}
   config-server-3:
     container_name: config-server-3
     image: mongo
     command: mongod --configsvr --replSet configServers --port 27017
-    ports:
-      - "40003:27017"
+    networks:
+      - ${MONGO_NETWORK}
+
+networks:
+  mongo-db-network:
+    name: ${MONGO_NETWORK}
+    external: true

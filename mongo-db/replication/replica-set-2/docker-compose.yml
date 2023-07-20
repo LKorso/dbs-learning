@@ -8,8 +8,8 @@ services:
       - ./replicaSet.js:/replicaSet.js
       - ./setup.sh:/setup.sh
     command: mongod --replSet rs2 --shardsvr --port 27017
-    ports:
-      - "20001:27017"
+    networks:
+      - ${MONGO_NETWORK}
     depends_on:
       - mongo-rs2-02
       - mongo-rs2-03
@@ -17,11 +17,16 @@ services:
     image: mongo
     container_name: mongo-rs2-02
     command: mongod --replSet rs2 --shardsvr --port 27017
-    ports:
-      - "20002:27017"
+    networks:
+      - ${MONGO_NETWORK}
   mongo-rs2-03:
     image: mongo
     container_name: mongo-rs2-03
     command: mongod --replSet rs2 --shardsvr --port 27017
-    ports:
-      - "20003:27017"
+    networks:
+      - ${MONGO_NETWORK}
+
+networks:
+  mongo-db-network:
+    name: ${MONGO_NETWORK}
+    external: true
