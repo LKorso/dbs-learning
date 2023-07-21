@@ -1,3 +1,9 @@
-db.runCommand({enablesharding: 'test'});
+sh.shardCollection(
+    "test.cities",
+    {name: 1}
+);
 
-db.runCommand({shardcollection: "test.cities", key: {name: 1}});
+sh.splitAt(
+    "test.cities",
+    {name: "Mascalucia"}
+);
