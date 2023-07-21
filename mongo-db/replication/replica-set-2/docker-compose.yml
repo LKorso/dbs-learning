@@ -6,7 +6,6 @@ services:
     container_name: mongo-rs2-01
     volumes:
       - ./replicaSet.js:/replicaSet.js
-      - ./setup.sh:/setup.sh
     command: mongod --replSet rs2 --shardsvr --port 27017
     networks:
       - ${MONGO_NETWORK}

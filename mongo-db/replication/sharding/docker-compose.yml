@@ -6,7 +6,6 @@ services:
     image: mongo
     volumes:
       - ./add-shards.js:/add-shards.js
-      - ./setup.sh:/setup.sh
     command: mongos --configdb configServers/config-server-1:27017,config-server-2:27017,config-server-3:27017 --bind_ip 0.0.0.0 --port 27017
     networks:
       - ${MONGO_NETWORK}

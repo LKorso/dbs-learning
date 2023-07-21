@@ -6,7 +6,6 @@ services:
     image: mongo
     volumes:
       - ./replicaSet.js:/replicaSet.js
-      - ./setup.sh:/setup.sh
     command: mongod --replSet rs1 --shardsvr --port 27017
     networks:
       - ${MONGO_NETWORK}
